@@ -1,0 +1,9 @@
+.product-box-individual {
+  border: 1px solid #000000;
+  color: #FF0000;
+}
+
+.product-box-individual img {
+  height: 150px;
+  width: auto;
+}
