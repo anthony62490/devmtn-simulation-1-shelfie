@@ -4,9 +4,9 @@ import './Form.css';
 
 class Form extends Component 
 {
-  constructor()
+  constructor(props)
   {
-    super();
+    super(props);
     this.state =
     {
       userInputName: "",
@@ -34,10 +34,14 @@ class Form extends Component
   {
     const { newName, newPrice, newImage } = this.state;
     axios
-      .post('/api/product', {newName, newPrice, newImage})
+      .post('/api/product', {name:newName, price:newPrice, image:newImage})
       .then(response => 
       {
-        console.log(response)
+        //call the parent's update function to refresh the contents
+        this.props.updateList();
+        //call the Cancel button's function to clear user inputs
+        this.handleCancelButtonEvent();
+        response.sendStatus(200);
       })
       .catch(err => console.log(`Error in postNewItem() - ${err}`));
   }
@@ -49,17 +53,17 @@ class Form extends Component
         <p>Image URL:</p>
         <input 
           onChange={(e) => this.setState({newImage:e.target.value})} 
-          value={this.state.userInputURL}/>
+          value={this.state.newImage}/>
 
         <p>Product Name:</p>
         <input 
           onChange={(e) => this.setState({newName:e.target.value})} 
-          value={this.state.userInputName}/>
+          value={this.state.newName}/>
 
         <p>Price:</p>
         <input 
           onChange={(e) => this.setState({newPrice:e.target.value})} 
-          value={this.state.userInputPrice}/>
+          value={this.state.newPrice}/>
 
         <button onClick={() => this.handleCancelButtonEvent()}>Cancel</button>
         <button onClick={() => this.postNewItem()}>Add to Inventory</button>
