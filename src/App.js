@@ -42,6 +42,7 @@ class App extends Component
           <Dashboard 
             productList={this.state.productList}
             updateList={this.getUpdatedInventoryList}/>
+            
           <Form 
             updateList={this.getUpdatedInventoryList}
             currentlyEditingID={this.state.currentlyEditingID}/>
