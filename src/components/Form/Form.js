@@ -48,8 +48,26 @@ class Form extends Component
 
   render() 
   {
+    let renderButtons;
+    if(this.props.currentlyEditingID === null)
+    {
+      renderButtons = <div>
+          <button onClick={() => this.handleCancelButtonEvent()}>Cancel</button>
+          <button onClick={() => this.postNewItem()}>Add to Inventory</button>
+        </div>
+    }
+    else //TODO - change this to handle different buttons
+    {
+      renderButtons = <div>
+          <button onClick={() => this.handleCancelButtonEvent()}>Cancel</button>
+          <button onClick={() => this.postNewItem()}>Add to Inventory</button>
+        </div>
+    }
+
+
     return (
       <div className="submit-form-contents">
+        <img src={this.state.newImage || "https://i.imgur.com/9WqBAP2.png"}/>
         <p>Image URL:</p>
         <input 
           onChange={(e) => this.setState({newImage:e.target.value})} 
@@ -64,9 +82,9 @@ class Form extends Component
         <input 
           onChange={(e) => this.setState({newPrice:e.target.value})} 
           value={this.state.newPrice}/>
-
-        <button onClick={() => this.handleCancelButtonEvent()}>Cancel</button>
-        <button onClick={() => this.postNewItem()}>Add to Inventory</button>
+        <div className="button-bar">
+          {renderButtons} {/* render conditionally selected buttons */}
+        </div>
       </div>
     );
   }

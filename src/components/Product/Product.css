@@ -1,9 +1,19 @@
 .product-box-individual {
-  border: 1px solid #000000;
-  color: #FF0000;
+  display: flex;
+  padding: 15px;
+  /* padding-top: 2px; */
+  margin-bottom: 20px;
+  /* border: 1px solid #000000; */
+  border-radius: 20px;
+  color: #FFFFFF;
+  background-color: #D34735;
 }
 
 .product-box-individual img {
   height: 150px;
   width: auto;
+}
+
+.product-box-info {
+  margin-left: 15px;
 }

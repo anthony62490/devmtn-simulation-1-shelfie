@@ -5,9 +5,13 @@ function Product(props)
 {
   return(
     <div className='product-box-individual'>
-      <p>{props.name}</p>
-      <p>${props.price}.99</p>
       <img src={props.url}/>
+      <div className="product-box-info">
+        <p>{props.name}</p>
+        <p>${props.price}.99</p>
+        <button onClick={() => props.deleteButtonEvent(props.id)}>Delete</button>
+        <button>Edit</button>
+      </div>
     </div>
   )//return
 }
