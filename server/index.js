@@ -6,7 +6,7 @@ require('dotenv').config();
 const {
   viewProducts,
   // viewOneProduct, //add if needed
-  addProducts,
+  addProduct,
   editProduct,
   deleteProduct
 } = require('./controller');
@@ -17,7 +17,7 @@ app.use(json());
 
 app.get('/api/inventory', viewProducts);
 // app.get('/api/inventory/:id', viewOneProduct)
-app.post('/api/products', addProducts);
+app.post('/api/product', addProduct);
 app.put('/api/products/edit/:id', editProduct);
 app.delete('/api/products/delete/:id', deleteProduct);
 

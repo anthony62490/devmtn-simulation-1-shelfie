@@ -19,14 +19,21 @@ class App extends Component
       //   {id: 2, name: 'The Mullet: Hairstyle...', price: 15, image: 'http://scout.cheatsheet.me/wp-content/uploads/2014/09/b7288bae2f6f020d2ce4110150ef31f6_650x.jpg'}
       // ]
     };
+
+    this.getUpdatedInventoryList = this.getUpdatedInventoryList.bind(this);
   }
 
-  componentDidMount()
+  getUpdatedInventoryList()
   {
     axios
       .get('/api/inventory')
       .then(response => this.setState({productList: response.data}) )
       .catch(err => console.log(`Error in ComponentDidMount() - ${err}`));
+  }
+
+  componentDidMount()
+  {
+    this.getUpdatedInventoryList();
   }
 
   render() 
@@ -35,7 +42,7 @@ class App extends Component
       <div className="App">
         <Header/>
         <Dashboard productList={this.state.productList}/>
-        <Form/>
+        <Form updateList={this.getUpdatedInventoryList}/>
       </div>
     ); //return
   }

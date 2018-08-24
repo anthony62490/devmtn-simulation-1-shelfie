@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './Form.css';
 
 class Form extends Component 
@@ -21,10 +22,24 @@ class Form extends Component
     //resets all user-input values to initial states
     this.setState(
       {
-        userInputName: "",
-        userInputPrice: 0,
-        userInputURL: ""
+        newName: "",
+        newPrice: 0,
+        newImage: ""
       });
+    
+      this.postNewItem = this.postNewItem.bind(this);
+  }
+
+  postNewItem()
+  {
+    const { newName, newPrice, newImage } = this.state;
+    axios
+      .post('/api/product', {newName, newPrice, newImage})
+      .then(response => 
+      {
+        console.log(response)
+      })
+      .catch(err => console.log(`Error in postNewItem() - ${err}`));
   }
 
   render() 
@@ -33,21 +48,21 @@ class Form extends Component
       <div className="submit-form-contents">
         <p>Image URL:</p>
         <input 
-          onChange={(e) => this.setState({userInputURL:e.target.value})} 
-          value={this.state.userInputURL}
-        />
+          onChange={(e) => this.setState({newImage:e.target.value})} 
+          value={this.state.userInputURL}/>
+
         <p>Product Name:</p>
         <input 
-          onChange={(e) => this.setState({userInputName:e.target.value})} 
-          value={this.state.userInputName}
-        />
+          onChange={(e) => this.setState({newName:e.target.value})} 
+          value={this.state.userInputName}/>
+
         <p>Price:</p>
         <input 
-          onChange={(e) => this.setState({userInputPrice:e.target.value})} 
-          value={this.state.userInputPrice}
-        />
+          onChange={(e) => this.setState({newPrice:e.target.value})} 
+          value={this.state.userInputPrice}/>
+
         <button onClick={() => this.handleCancelButtonEvent()}>Cancel</button>
-        <button>Add to Inventory</button>
+        <button onClick={() => this.postNewItem()}>Add to Inventory</button>
       </div>
     );
   }
